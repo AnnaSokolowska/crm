@@ -80,8 +80,21 @@ const createRow = (obj) => {
 const renderGoods = (mass) => {
   for (let i = 0; i < mass.length; i++) {
     const tableRows = createRow(mass[i]);
+    tableRows.classList.add('table__row');
     tableBody.append(tableRows);
   }
+  tableBody.addEventListener('click', e => {
+    const target = e.target;
+    if (target.closest('.table__btn_del')) {
+      const rowDel = target.closest('.table__row');
+      const a = rowDel.querySelector('.table__cell_name');
+      const b = Number(a.getAttribute('data-id'));
+      const i = mass.findIndex((item) => item.id === b);
+      mass.splice(i, 1);
+      target.closest('.table__row').remove();
+      console.log(mass);
+    }
+  });
 };
 
 const btnAddGoods = document.querySelector('.panel__add-goods');
@@ -95,12 +108,15 @@ btnAddGoods.addEventListener('click', () => {
 btnModalClose.addEventListener('click', () => {
   overlay.classList.toggle('active');
 });
-modalWindow.addEventListener('click', event => {
-  event.stopPropagation();
+overlay.addEventListener('click', e => {
+  const target = e.target;
+  if (target === overlay || target.classList.contains('close')) {
+    overlay.classList.remove('active');
+  }
 });
-overlay.addEventListener('click', () => {
-  overlay.classList.remove('active');
-});
+
+
+
 renderGoods([
   {
     'id': 2,
