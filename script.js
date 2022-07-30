@@ -2,7 +2,7 @@
 
 const overlay = document.querySelector('.overlay');
 overlay.classList.remove('active');
-let crmTotalPrice = document.querySelector('.crm__total-price');
+const crmTotalPrice = document.querySelector('.crm__total-price');
 crmTotalPrice.textContent = '0';
 
 const mass = [
