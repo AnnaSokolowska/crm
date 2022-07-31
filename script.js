@@ -5,6 +5,7 @@ overlay.classList.remove('active');
 const crmTotalPrice = document.querySelector('.crm__total-price');
 crmTotalPrice.textContent = '0';
 
+
 const mass = [
   {
     'id': 2,
@@ -51,6 +52,15 @@ const mass = [
 
 
 const tableBody = document.querySelector('.table__body');
+const tableRows = tableBody.querySelectorAll('tr');
+tableRows.forEach(item => item.className = 'table__row');
+
+const btnCells = document.querySelectorAll('.table__cell_btn-wrapper');
+btnCells.forEach(item => {
+  item.previousElementSibling.classList.add('table__cell-total');
+  crmTotalPrice.textContent = Number(crmTotalPrice.textContent) +
+  Number(item.previousElementSibling.textContent.slice(1));
+});
 
 const createRow = (obj) => {
   const tableRow = document.createElement('tr');
@@ -108,6 +118,7 @@ const createRow = (obj) => {
   tableCellTotalCost.insertAdjacentText('afterbegin', `$${totalCost}`);
   tableRow.appendChild(tableCellTotalCost);
 
+
   const totalPrice = totalCost + Number(crmTotalPrice.textContent);
   crmTotalPrice.textContent = totalPrice;
 
@@ -140,15 +151,21 @@ const renderGoods = (mass) => {
     const target = e.target;
     if (target.closest('.table__btn_del')) {
       const rowDel = target.closest('.table__row');
+      const delCost = Number(rowDel.
+        querySelector('.table__cell-total').textContent.slice(1));
       const a = rowDel.querySelector('.table__cell_name');
       const b = Number(a.getAttribute('data-id'));
       const i = mass.findIndex((item) => item.id === b);
       mass.splice(i, 1);
       target.closest('.table__row').remove();
+      crmTotalPrice.textContent = Number(crmTotalPrice.textContent) -
+      delCost;
       console.log(mass);
     }
   });
 };
+
+
 const form = document.querySelector('.modal__form');
 const modalInput = form.querySelectorAll('.modal__input');
 modalInput.forEach(Element => Element.toggleAttribute('required'));
@@ -159,7 +176,7 @@ form.category.setAttribute('type', 'text');
 form.units.setAttribute('type', 'text');
 form.price.setAttribute('type', 'number');
 form.count.setAttribute('type', 'number');
-form.discount.setAttribute('type', 'number');
+form.discount_count.setAttribute('type', 'number');
 
 
 const btnAddGoods = document.querySelector('.panel__add-goods');
@@ -192,9 +209,8 @@ overlay.addEventListener('click', e => {
   }
 });
 
+
 const discountCount = form.discount_count;
-
-
 form.discount.addEventListener('change', () => {
   discountCount.toggleAttribute('disabled');
   discountCount.value = '';
@@ -209,6 +225,8 @@ const addGoods = obj => {
 
 const addGoodsPage = (obj, tableBody) => {
   tableBody.append(createRow(obj));
+  const tableRows = tableBody.lastElementChild;
+  tableRows.className = 'table__row';
 };
 
 
