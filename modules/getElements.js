@@ -83,6 +83,7 @@ export const createRow = (obj) => {
   const tableCellBtn = document.createElement('td');
   tableCellBtn.classList.add('table__cell', 'table__cell_btn-wrapper');
   const tableBtnPic = document.createElement('button');
+  tableBtnPic.setAttribute('data-pic', 'https://images.wallpaperscraft.ru/image/single/pejzazh_gory_solntse_140434_800x600.jpg');
   tableBtnPic.classList.add('table__btn', 'table__btn_pic');
 
   tableCellBtn.appendChild(tableBtnPic);

@@ -74,6 +74,15 @@ const renderGoods = (mass) => {
       delCost;
       console.log(mass);
     }
+    if (target.closest('.table__btn_pic')) {
+      const left = (screen.width - 800) / 2;
+      const top = (screen.height - 600) / 2;
+      const btnPicUrl = target.closest('.table__btn_pic').
+        getAttribute('data-pic');
+      console.log(btnPicUrl);
+      open(`${btnPicUrl}`, '',
+        `left=${left},top=${top},width=800,height=600`);
+    }
     const tableCellNumber = tableBody.querySelectorAll('.table__cell_number');
     for (let i = 0; i < mass.length; i++) {
       tableCellNumber[i].textContent = `${i + 1}`;
