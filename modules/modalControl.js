@@ -100,10 +100,35 @@ const clickBtnAdd = () => {
   });
 };
 
+const clickAddImage = () => {
+  const form = getForm();
+  const file = document.getElementById('image');
+  file.insertAdjacentHTML('beforebegin', '<img class="preview"></img>');
+  file.insertAdjacentHTML('beforebegin',
+  '<p class="visually-hidden modal__texts"> Изображение не должно превышать размер 1 Мб</p>');
+  const p = document.querySelector('.modal__texts');
+  const preview = form.querySelector('.preview');
+  file.addEventListener('change', () => {
+    if (file.files.length > 0) {
+      const src = URL.createObjectURL(file.files[0]);
+      if (file.files[0].size < 1000000) {
+        p.classList.add('visually-hidden');
+        preview.src = src;
+        console.log(file.files[0]);
+      } else {
+        preview.src = '';
+        p.classList.remove('visually-hidden');
+      }
+    }
+  });
+};
+
+
 export const initModal = () => {
   getModalInput();
   clickBtnAdd();
   clickModalClose();
+  clickAddImage();
 };
 
 
