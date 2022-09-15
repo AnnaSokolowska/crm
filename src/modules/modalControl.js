@@ -1,4 +1,5 @@
 
+
 export const getOverlay = () => {
   const overlay = document.querySelector('.overlay');
   return overlay;
@@ -22,7 +23,7 @@ const getBtnModalClose = () => {
 
 export const getForm = () => {
   const form = document.querySelector('.modal__form');
-  form.name.setAttribute('type', 'text');
+  form.title.setAttribute('type', 'text');
   form.description.setAttribute('type', 'text');
   form.category.setAttribute('type', 'text');
   form.units.setAttribute('type', 'text');
@@ -54,12 +55,8 @@ const getVendore = () => {
   return vendorCode;
 };
 
-const getRandomNumber = () => {
-  const randomId = Math.floor(Math.random() * 99000000000000) + 1;
-  return randomId;
-};
 
-const getDiscountCount = () => {
+export const getDiscountCount = () => {
   const form = getForm();
   const discountCount = form.discount_count;
 
@@ -69,14 +66,14 @@ const getDiscountCount = () => {
   });
 };
 
-const openModal = () => {
+export const openModal = () => {
   const form = getForm();
+  console.log(form);
   const overlay = getOverlay();
   overlay.classList.add('active');
   const vendorCode = getVendore();
-  const randomId = getRandomNumber();
   getDiscountCount();
-  vendorCode.textContent = randomId;
+  vendorCode.textContent = '';
   form.total.textContent = '';
   form.price.addEventListener('blur', () => {
     form.total.textContent = Number(form.price.value) * form.count.value;
@@ -92,6 +89,8 @@ const clickBtnAdd = () => {
   const btnAddGoods = getBtnAddGoods();
   const overlay = getOverlay();
   btnAddGoods.addEventListener('click', openModal);
+
+
   overlay.addEventListener('click', e => {
     const target = e.target;
     if (target === overlay || target.classList.contains('close')) {
@@ -103,9 +102,10 @@ const clickBtnAdd = () => {
 const clickAddImage = () => {
   const form = getForm();
   const file = document.getElementById('image');
-  file.insertAdjacentHTML('beforebegin', '<img class="preview"></img>');
+  file.insertAdjacentHTML('afterend', '<img class="preview"></img>');
   file.insertAdjacentHTML('beforebegin',
-  '<p class="visually-hidden modal__texts"> Изображение не должно превышать размер 1 Мб</p>');
+    `<p class="visually-hidden modal__texts">
+  Изображение не должно превышать размер 1 Мб</p>`);
   const p = document.querySelector('.modal__texts');
   const preview = form.querySelector('.preview');
   file.addEventListener('change', () => {
@@ -113,6 +113,11 @@ const clickAddImage = () => {
       const src = URL.createObjectURL(file.files[0]);
       if (file.files[0].size < 1000000) {
         p.classList.add('visually-hidden');
+        preview.style.cssText = `
+        display: grid;
+        grid-column-start: 1;
+        grid-column-end: 3;
+        `;
         preview.src = src;
         console.log(file.files[0]);
       } else {
@@ -122,6 +127,23 @@ const clickAddImage = () => {
     }
   });
 };
+const input = document.getElementById('category');
+
+const addCategory = async () => {
+  input.setAttribute('list', 'category-list');
+  const dataList = document.createElement('datalist');
+  dataList.setAttribute('id', 'category-list');
+  input.insertAdjacentElement('afterend', dataList);
+  const result = await fetch('http://localhost:3000/api/category/');
+  const data = await result.json();
+  const options = data.map(item => {
+    const option = document.createElement('option');
+    option.setAttribute('value', `${item}`);
+    return option;
+  });
+  dataList.append(...options);
+  return options;
+};
 
 
 export const initModal = () => {
@@ -129,6 +151,7 @@ export const initModal = () => {
   clickBtnAdd();
   clickModalClose();
   clickAddImage();
+  addCategory();
 };
 
 

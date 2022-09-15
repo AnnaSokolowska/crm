@@ -24,23 +24,21 @@ export const getTableRow = () => {
 
 export const createRow = (obj) => {
   const tableRow = document.createElement('tr');
+  tableRow.classList.add('table__row');
 
-  const tableCellNumber = document.createElement('td');
-  tableCellNumber.classList.add('table__cell', 'table__cell_number');
-  tableRow.appendChild(tableCellNumber);
+  const tableCellIdNumber = document.createElement('td');
+  tableCellIdNumber.classList.add('table__cell',
+    'table__cell_number');
+  const id = obj.id;
+  tableCellIdNumber.setAttribute('data-id', id);
+  tableCellIdNumber.insertAdjacentText('beforeend', id);
+  tableRow.appendChild(tableCellIdNumber);
+
 
   const tableCellName = document.createElement('td');
   tableCellName.classList.add(
     'table__cell', 'table__cell_left', 'table__cell_name');
-  const id = obj.id;
-  tableCellName.setAttribute('data-id', id);
-  const span = document.createElement('span');
-  span.classList.add('table__cell-id');
-  const spanText = `id:${id}`;
-  span.insertAdjacentText('afterbegin', spanText);
-  tableCellName.appendChild(span);
-
-  const productName = obj.name;
+  const productName = obj.title;
   tableCellName.insertAdjacentText('beforeend', productName);
   tableRow.appendChild(tableCellName);
 
@@ -83,7 +81,7 @@ export const createRow = (obj) => {
   const tableCellBtn = document.createElement('td');
   tableCellBtn.classList.add('table__cell', 'table__cell_btn-wrapper');
   const tableBtnPic = document.createElement('button');
-  tableBtnPic.setAttribute('data-pic', 'https://images.wallpaperscraft.ru/image/single/pejzazh_gory_solntse_140434_800x600.jpg');
+  tableBtnPic.setAttribute('data-pic', `http://localhost:3000/API/${obj.image}`);
   tableBtnPic.classList.add('table__btn', 'table__btn_pic');
 
   tableCellBtn.appendChild(tableBtnPic);

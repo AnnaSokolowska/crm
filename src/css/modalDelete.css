@@ -1,0 +1,123 @@
+.overlay__delete {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+.overlay__edit {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.8);
+}
+.modal__delete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 980px;
+  width: 100%;
+  height: 495px;
+  background: #FFFFFF;
+  border: 1px solid #AFAFAF;
+  border-radius: 30px;
+  padding: 60px;
+}
+
+.overlay__modal_edit {
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
+.overlay__edit {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.modal__edit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 980px;
+  width: 100%;
+  height: 495px;
+  background: #FFFFFF;
+  border: 1px solid #AFAFAF;
+  padding: 60px;
+}
+.modal__message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 980px;
+  width: 100%;
+  height: 495px;
+  background: #F2F0F9;
+  border: 1px solid #AFAFAF;
+  border-radius: 30px;
+  padding: 60px;
+  z-index: 150;
+}
+.modal__image_krest {
+  text-align: center;
+  margin-top: 109px;
+}
+.modal__title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.modal__text_message {
+  font-size: 30px;
+  text-align: center;
+  margin-top: 40px;
+}
+.modal__text_delete {
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.modal__button_delete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.modal__btn_delete {
+  padding: 16px 40px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #FCB500;
+  border: 2px solid transparent;
+}
+
+.modal__btn_edit {
+  background-color: #fc8900;
+}
+
+.modal__btn_delete:hover {
+  background-color: #ffbbaa;
+}
+
+.modal__btn_delete:active {
+  transform: translate(2px, 2px);
+}
+
+.modal__btn_delete:focus {
+  outline: 1px solid #FCB500;
+  outline-offset: 5px;
+}

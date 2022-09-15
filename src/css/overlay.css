@@ -15,7 +15,7 @@
   display: flex;
 }
 
-.overlay__modal {
+.overlay__modal, .overlay__modal_edit {
   position: absolute;
   top: 0;
   right: 0;
