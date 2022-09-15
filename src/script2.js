@@ -34,8 +34,9 @@ export const renderGoods = async () => {
       const top = (screen.height - 600) / 2;
       const btnPicUrl = target.closest('.table__btn_pic').
         getAttribute('data-pic');
+
       console.log(btnPicUrl);
-      open(`${btnPicUrl}`, '',
+      open(`http://localhost:3000/${btnPicUrl}`, '',
         `left=${left},top=${top},width=800,height=600`);
     }
   });

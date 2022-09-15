@@ -14,7 +14,7 @@ export const editModal = async (err, data) => {
         grid-column-end: 3;
         `;
   console.log(preview);
-  preview.setAttribute('src', `http://localhost:3000/api/${data.image}`);
+  preview.setAttribute('src', `http://localhost:3000/${data.image}`);
   idCode.textContent = `${data.id}`;
   formChange.title.value = data.title;
   formChange.description.value = data.description;

@@ -81,7 +81,7 @@ export const createRow = (obj) => {
   const tableCellBtn = document.createElement('td');
   tableCellBtn.classList.add('table__cell', 'table__cell_btn-wrapper');
   const tableBtnPic = document.createElement('button');
-  tableBtnPic.setAttribute('data-pic', `http://localhost:3000/API/${obj.image}`);
+  tableBtnPic.setAttribute('data-pic', `${obj.image}`);
   tableBtnPic.classList.add('table__btn', 'table__btn_pic');
 
   tableCellBtn.appendChild(tableBtnPic);
